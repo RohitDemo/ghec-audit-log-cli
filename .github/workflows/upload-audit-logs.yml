@@ -31,10 +31,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    # Configure the cursor endpoint
-    - name: Export Cursor
-      run: export LAST_CURSOR=$(cat .last-v3-cursor-update)
-
     # Need to install NPM
     - name: NPM Install
       run: npm install
@@ -55,12 +51,3 @@ jobs:
         path: audit-log-output.json
         
     # Commit the cursor back to source
-    - name: Commit cursor
-      uses: EndBug/add-and-commit@v5
-      with:
-        author_name: Audit Log Integration
-        author_email: ${{ secrets.COMMITTER_EMAIL }}
-        message: "Updating cursor for audit log"
-        add: ".last-v3-cursor-update"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
