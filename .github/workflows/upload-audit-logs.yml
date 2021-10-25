@@ -49,5 +49,15 @@ jobs:
       with:
         name: audit-logs
         path: audit-log-output.json
+    
+    - name: Commit cursor
+      uses: EndBug/add-and-commit@v5
+      with:
+        author_name: Audit Log Integration
+        author_email: ${{ secrets.COMMITTER_EMAIL }}
+        message: "Updating cursor for audit log"
+        add: ".last-v3-cursor-update"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     # Commit the cursor back to source
